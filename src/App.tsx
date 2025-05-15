@@ -2,13 +2,11 @@ import { ThemeProvider } from "styled-components"
 import { GlobalStyle } from "./styles/global"
 import { defaultTheme } from "./styles/themes/defaultTheme"
 
-import { Header } from "./components/Header"
-
-export function App() {
+export function App({children} : {children: React.ReactNode}) {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <Header />
+      {children}
     </ThemeProvider>
   )
 }
