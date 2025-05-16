@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.main`
  max-width: 70rem;
  display: flex;
+ flex-direction: column;
  justify-content: space-between;
  align-items: center;
  margin: 0 auto;
@@ -89,5 +90,24 @@ export const Info = styled.div`
    span {
     color: ${(props) => props.theme.COLORS["base-text"]};
    }
+  }
+`
+
+export const ListCoffee = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-family: "Baloo 2", sans-serif;
+    font-size: 2rem;
+    margin: 8rem 0 3.37rem;
+  }
+
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 2.5rem;
+    grid-gap: 2rem;
   }
 `

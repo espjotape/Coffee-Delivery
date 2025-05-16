@@ -40,6 +40,7 @@ export const Cart = styled.div`
  padding: 0.5rem;
  gap: 0.25rem;
  position: relative;
+ cursor: pointer;
 
  background-color: ${props => props.theme.COLORS["yellow-light"]};
  border-radius: 6px;

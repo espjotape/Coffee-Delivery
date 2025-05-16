@@ -1,5 +1,8 @@
-import { Container, Content, Heading, Info } from "./styles"
+import { Container, Content, Heading, Info, ListCoffee } from "./styles"
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
+
+import { Card } from "../../components/Card"
+import { coffees } from "../../../coffees-data.json"
 
 export function Home() {
  return(
@@ -46,6 +49,15 @@ export function Home() {
 
     <img src="/img/coffee.svg" alt="img de um copo flutuando no background"/>
    </Content>
+   <ListCoffee>
+    <h2>Nossos cafés</h2>
+
+    <div>
+      {coffees.map((coffee) => (
+        <Card key={coffee.id} coffee={coffee}/>
+      ))}
+    </div>
+   </ListCoffee>
   </Container>
  )
 }
