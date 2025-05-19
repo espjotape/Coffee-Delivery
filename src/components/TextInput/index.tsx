@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, type InputHTMLAttributes } from "react";
 import { Container } from "./styles";
 
-type Props = {
+type Props = InputHTMLAttributes<HTMLInputElement> & {
  optional?: boolean
  placeholder: string
  gridArea: string

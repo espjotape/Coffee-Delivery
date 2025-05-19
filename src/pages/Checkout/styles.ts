@@ -8,6 +8,16 @@ export const Container = styled.div`
  margin: 2.5rem auto;
 `
 
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  background-color: ${(props => props.theme.COLORS["base-card"])};
+  border-radius: 6px;
+  padding: 2rem;
+`
+
 export const InfoCheckout = styled.div`
  display: flex;
  flex-direction: column;
@@ -18,16 +28,6 @@ export const InfoCheckout = styled.div`
   font-weight: bold;
   line-height: 130%;
   color: ${(props => props.theme.COLORS["base-subtitle"])}
- }
-
- > form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  background-color: ${(props => props.theme.COLORS["base-card"])};
-  border-radius: 6px;
-  padding: 2.5rem;
  }
 `
 
@@ -68,4 +68,19 @@ export const AddressForm = styled.div`
  "numero complemento complemento"
  "bairro cidade uf";
  grid-gap: 1rem 0.75rem;
+`
+
+export const PaymentContainer = styled(FormContainer)`
+ margin-top: 0.75rem;
+ 
+ svg {
+  color: ${(props => props.theme.COLORS["purple"])}
+ }
+`
+
+export const PaymentOptions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 `
