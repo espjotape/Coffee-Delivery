@@ -15,7 +15,7 @@ export const Aside = styled.aside`
  display: flex;
  gap: 0.75rem;
 
- div:first-child {
+ > div:first-child {
   display: flex;
   align-items: center;
   padding: 0.5rem;

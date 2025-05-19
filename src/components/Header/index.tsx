@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Container, Aside, Cart } from "./styles"
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 export function Header() {
  const [fakeCart] = useState([1,2,3]);
@@ -15,10 +16,13 @@ export function Header() {
      <span>Porto Alegre, RS</span>
     </div>
 
-    <Cart>
+    <Link to="/checkout">
+    <Cart> 
      <ShoppingCart size={22} weight="fill"/>
      {fakeCart.length > 0 ? <span>{fakeCart.length}</span> : null}
     </Cart>
+    </Link>
+
    </Aside>
   </Container>
  )
