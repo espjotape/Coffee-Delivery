@@ -1,14 +1,17 @@
-import { useState } from "react";
 import { Container, Aside, Cart } from "./styles"
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../contexts/CartProvider";
 
 export function Header() {
- const [fakeCart] = useState([1,2,3]);
+ const { cart } = useContext(CartContext)
 
  return(
   <Container>
-   <img src="/public/Logo-Coffee-Delivery.svg" alt="Logo Coffe Delivery" />
+   <Link to="/">
+    <img src="/public/Logo-Coffee-Delivery.svg" alt="Logo Coffe Delivery" />
+   </Link>
   
    <Aside>
     <div>
@@ -19,7 +22,7 @@ export function Header() {
     <Link to="/checkout">
     <Cart> 
      <ShoppingCart size={22} weight="fill"/>
-     {fakeCart.length > 0 ? <span>{fakeCart.length}</span> : null}
+     {cart.length > 0 ? <span>{cart.length}</span> : null}
     </Cart>
     </Link>
 
