@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { PaymentMethodButton } from "../../components/PaymentMethodButton";
 import { TextInput } from "../../components/TextInput";
-import { Container, InfoCheckout, Heading, AddressForm, PaymentContainer, FormContainer, PaymentOptions } from "./styles";
-import { CreditCard, CurrencyDollar, MapPin, Bank, Money } from '@phosphor-icons/react'
+import { Container, InfoCheckout, Heading, AddressForm, PaymentContainer, FormContainer, PaymentOptions, CartContainer, Coffee, CartTotal, Button } from "./styles";
+import { CreditCard, CurrencyDollar, MapPin, Bank, Money, Trash } from '@phosphor-icons/react'
+import { ItemQuantity } from "../../components/ItemQuantity";
 
 export function Checkout() {
  const [selected, setSelected] = useState<'credit' | 'debit' | 'cash' | null>(null);
@@ -100,6 +101,58 @@ export function Checkout() {
 
    <InfoCheckout>
     <h2>Cafés selecionados</h2>
+    <CartContainer>
+      <Coffee>
+        <img src="/public/img/coffee/expresso-tradicional.png" alt=""/>        <div className="coffeeContent">
+          <div  className="coffeeInfo">
+            <span>Expresso Tradicional</span>
+              <div className="btn">
+                <ItemQuantity quantity={1}/>
+                <button>
+                  <Trash />
+                  <span>remover</span>
+                </button>
+              </div>
+          </div>
+          <aside>R$ 9,99</aside>
+        </div>
+        
+      </Coffee>
+      <span />
+      <Coffee>
+        <img src="/public/img/coffee/latte.png" alt=""/>        <div className="coffeeContent">
+          <div  className="coffeeInfo">
+            <span>Latte</span>
+              <div className="btn">
+                <ItemQuantity quantity={1}/>
+                <button>
+                  <Trash />
+                  <span>remover</span>
+                </button>
+              </div>
+          </div>
+          <aside>R$ 19,80</aside>
+        </div>
+      </Coffee>
+      <span />
+   
+      <CartTotal>
+        <section>
+          <span>Total de itens</span>
+          <span className="order-info">R$ 27,90</span>
+        </section>
+        <section>
+          <span>Entrega</span>
+          <span className="order-info">R$ 3,50</span>
+        </section>
+        <section>
+          <h4>Total</h4>
+          <h4>R$ 33,20</h4>
+        </section>
+
+        <Button>confirmar pedido</Button>
+      </CartTotal>
+    </CartContainer>
    </InfoCheckout>
   </Container>
  )
