@@ -93,7 +93,7 @@ export const CartContainer = styled.div`
   border-radius: 6px 36px;
   background-color: ${(props => props.theme.COLORS["base-card"])};
   
-  > span {
+  .line {
     display: block;
     height: 1px;
     background-color: ${({ theme }) => theme.COLORS['base-button']};
@@ -106,7 +106,14 @@ export const Coffee = styled.article`
   justify-content: space-between;
   gap: 1.25rem;
   min-width: 28rem;
-  
+
+  .line {
+    display: block;
+    height: 1px;
+    background-color: ${({ theme }) => theme.COLORS['base-button']};
+    margin: 2rem 0;
+  }
+
   img {
     width: 64px;
     height: 64px;

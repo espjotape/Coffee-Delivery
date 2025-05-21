@@ -20,6 +20,24 @@ export function cartReducer(state: CartState, action: CartAction) {
     }
    }) 
 
+  case ActionTypes.INCREMENT_ITEM_QUANTITY: {
+      const updatedCart = state.cart.map(item => 
+         item.id === action.payload.itemId
+         ? { ...item, quantity: item.quantity + 1}
+         : item
+      )
+      return { ...state, cart: updatedCart }
+   }
+
+  case ActionTypes.DECREMENT_ITEM_QUANTITY: {
+      const updatedCart = state.cart.map(item => 
+         item.id === action.payload.itemId && item.quantity > 1
+         ? { ...item, quantity: item.quantity - 1}
+         : item
+      )
+      return { ...state, cart: updatedCart }
+   }
+
    default:
     return state
  } 

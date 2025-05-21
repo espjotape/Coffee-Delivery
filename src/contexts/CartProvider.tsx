@@ -1,5 +1,5 @@
-import { createContext, use, useEffect, useReducer } from "react"
-import { addItemAction, type CartItem } from "../reducers/Cart/actions"
+import { createContext, useEffect, useReducer } from "react"
+import { addItemAction, decrementItemQuantityAction, incrementItemQuantityAction, type CartItem } from "../reducers/Cart/actions"
 import { cartReducer } from "../reducers/Cart/reducer"
 
 interface CartContextProviderProps {
@@ -9,6 +9,8 @@ interface CartContextProviderProps {
 interface CartContextType {
  cart: CartItem[]
  addItem: (item: CartItem) => void
+ incrementItemQuantity: (itemId: string) => void
+ decrementItemQuantity: (itemId: string) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -37,11 +39,21 @@ export function CartContextProvider({children} : CartContextProviderProps) {
   dispatch(addItemAction(item))
  }
 
+ function incrementItemQuantity(itemId: string) {
+   dispatch(incrementItemQuantityAction(itemId))
+ }
+
+ function decrementItemQuantity(itemId: string) {
+   dispatch(decrementItemQuantityAction(itemId))
+ } 
+
  return(
   <CartContext.Provider 
    value={{
     cart: cartState.cart,
-    addItem
+    addItem,
+    incrementItemQuantity,
+    decrementItemQuantity
    }}
    >
    {children}

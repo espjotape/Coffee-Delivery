@@ -1,12 +1,42 @@
-import { useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { PaymentMethodButton } from "../../components/PaymentMethodButton";
 import { TextInput } from "../../components/TextInput";
 import { Container, InfoCheckout, Heading, AddressForm, PaymentContainer, FormContainer, PaymentOptions, CartContainer, Coffee, CartTotal, Button } from "./styles";
 import { CreditCard, CurrencyDollar, MapPin, Bank, Money, Trash } from '@phosphor-icons/react'
 import { ItemQuantity } from "../../components/ItemQuantity";
+import { coffees } from "../../../coffees-data.json"
+import { CartContext } from "../../contexts/CartProvider";
 
 export function Checkout() {
+ const { cart, decrementItemQuantity, incrementItemQuantity } = useContext(CartContext)
  const [selected, setSelected] = useState<'credit' | 'debit' | 'cash' | null>(null);
+
+ const coffeesInCart = cart.map((item) => {
+  const coffeeInfo = coffees.find((coffee) => coffee.id === item.id)
+
+  if(!coffeeInfo) {
+    throw new Error('Coffee not found')
+  }
+
+  return {
+    ...coffeeInfo,
+    quantity: item.quantity,
+  }
+ })
+
+  function handleIncrement(itemId: string) {
+    incrementItemQuantity(itemId)
+  }
+
+  function handleDecrement(itemId: string) {
+    decrementItemQuantity(itemId)
+  }
+
+  const totalItemsPrice = coffeesInCart.reduce((previousValue, currentItem) => {
+    return(previousValue += currentItem.price * currentItem.quantity)
+  }, 0 )
+
+  const delivery = 3.5
 
  return (
   <Container>
@@ -102,52 +132,62 @@ export function Checkout() {
    <InfoCheckout>
     <h2>Cafés selecionados</h2>
     <CartContainer>
-      <Coffee>
-        <img src="/public/img/coffee/expresso-tradicional.png" alt=""/>        <div className="coffeeContent">
-          <div  className="coffeeInfo">
-            <span>Expresso Tradicional</span>
+     {coffeesInCart.map((coffee) => (
+      <Fragment key={coffee.id}>
+        <Coffee>
+          <img src={coffee.image} alt={coffee.title} />
+          <div className="coffeeContent">
+            <div className="coffeeInfo">
+              <span>{coffee.title}</span>
               <div className="btn">
-                <ItemQuantity quantity={1}/>
+                <ItemQuantity
+                  onIncrement={() => handleIncrement(coffee.id)}
+                  onDecrement={() => handleDecrement(coffee.id)}
+                  quantity={coffee.quantity}
+                />
                 <button>
                   <Trash />
                   <span>remover</span>
                 </button>
               </div>
+
+            </div>
+            <aside>
+              R$ {coffee.price.toFixed(2)}
+            </aside>
           </div>
-          <aside>R$ 9,99</aside>
-        </div>
-        
-      </Coffee>
-      <span />
-      <Coffee>
-        <img src="/public/img/coffee/latte.png" alt=""/>        <div className="coffeeContent">
-          <div  className="coffeeInfo">
-            <span>Latte</span>
-              <div className="btn">
-                <ItemQuantity quantity={1}/>
-                <button>
-                  <Trash />
-                  <span>remover</span>
-                </button>
-              </div>
-          </div>
-          <aside>R$ 19,80</aside>
-        </div>
-      </Coffee>
-      <span />
-   
+        </Coffee>
+        <span className="line" />
+      </Fragment>
+      ))}
+
       <CartTotal>
         <section>
           <span>Total de itens</span>
-          <span className="order-info">R$ 27,90</span>
+          <span className="order-info">
+            {new Intl.NumberFormat('pt-br', {
+                currency: 'BRL',
+                style: 'currency',
+              }).format(totalItemsPrice)}
+            </span>
         </section>
         <section>
           <span>Entrega</span>
-          <span className="order-info">R$ 3,50</span>
+          <span className="order-info">
+           {new Intl.NumberFormat('pt-br', {
+                currency: 'BRL',
+                style: 'currency',
+              }).format(delivery)}
+          </span>
         </section>
         <section>
           <h4>Total</h4>
-          <h4>R$ 33,20</h4>
+          <h4>
+            {new Intl.NumberFormat('pt-br', {
+              currency: 'BRL',
+              style: 'currency',
+            }).format(totalItemsPrice + delivery)}
+          </h4>
         </section>
 
         <Button>confirmar pedido</Button>
