@@ -8,8 +8,7 @@ export interface CartItem {
 
 export enum ActionTypes {
   ADD_ITEM = 'ADD_ITEM',
-  // REMOVE_ITEM = 'REMOVE_ITEM',
-  // CLEAR_CART = 'CLEAR_CART',
+  REMOVE_ITEM = 'REMOVE_ITEM',
   INCREMENT_ITEM_QUANTITY = 'INCREMENT_ITEM_QUANTITY',
   DECREMENT_ITEM_QUANTITY = 'DECREMENT_ITEM_QUANTITY'
 }
@@ -21,6 +20,15 @@ export function addItemAction(item: CartItem) {
     item
   }
  } as const
+}
+
+export function removeItemCartAction(itemId: CartItem['id']) {
+  return {
+    type: ActionTypes.REMOVE_ITEM,
+    payload: {
+      itemId
+    }
+  } as const
 }
 
 export function incrementItemQuantityAction(itemId: string) {
@@ -43,5 +51,6 @@ export function decrementItemQuantityAction(itemId: string) {
 
 export type CartAction = 
   | ReturnType<typeof addItemAction>
+  | ReturnType<typeof removeItemCartAction>
   | ReturnType<typeof incrementItemQuantityAction>
   | ReturnType<typeof decrementItemQuantityAction>

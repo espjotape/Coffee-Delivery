@@ -8,7 +8,7 @@ import { coffees } from "../../../coffees-data.json"
 import { CartContext } from "../../contexts/CartProvider";
 
 export function Checkout() {
- const { cart, decrementItemQuantity, incrementItemQuantity } = useContext(CartContext)
+ const { cart, removeItem ,decrementItemQuantity, incrementItemQuantity } = useContext(CartContext)
  const [selected, setSelected] = useState<'credit' | 'debit' | 'cash' | null>(null);
 
  const coffeesInCart = cart.map((item) => {
@@ -30,6 +30,10 @@ export function Checkout() {
 
   function handleDecrement(itemId: string) {
     decrementItemQuantity(itemId)
+  }
+
+  function handleItemRemove(itemId: string) {
+    removeItem(itemId)
   }
 
   const totalItemsPrice = coffeesInCart.reduce((previousValue, currentItem) => {
@@ -147,7 +151,7 @@ export function Checkout() {
                 />
                 <button>
                   <Trash />
-                  <span>remover</span>
+                  <span onClick={() => handleItemRemove(coffee.id)}>remover</span>
                 </button>
               </div>
 

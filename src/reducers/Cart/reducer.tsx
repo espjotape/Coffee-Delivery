@@ -18,7 +18,15 @@ export function cartReducer(state: CartState, action: CartAction) {
     }else {
      draft.cart.push(action.payload.item)
     }
-   }) 
+   })
+
+  case ActionTypes.REMOVE_ITEM:
+   return produce(state, (draft) => {
+      const itemToRemoveId = draft.cart.findIndex(
+         (item) => item.id === action.payload.itemId,
+      )
+      draft.cart.splice(itemToRemoveId, 1)
+   })
 
   case ActionTypes.INCREMENT_ITEM_QUANTITY: {
       const updatedCart = state.cart.map(item => 
