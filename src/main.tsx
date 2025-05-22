@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { App } from './App.tsx'
 import { Home } from './pages/Home/Index.tsx'
 import { Checkout } from './pages/Checkout/index.tsx'
-import { Success } from './pages/Sucess/index.tsx'
+import { Success } from './pages/Success/index.tsx'
 
 
 const router = createBrowserRouter([
