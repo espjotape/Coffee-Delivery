@@ -34,8 +34,10 @@ type FormInputs = {
   paymentMethod: 'credit' | 'debit' | 'cash'
 }
 
+export type OrderInfo = zod.infer<typeof checkoutFormSchema>
+
 export function Checkout() {
- const { cart, removeItem ,decrementItemQuantity, incrementItemQuantity } = useContext(CartContext)
+ const { cart, removeItem ,decrementItemQuantity, incrementItemQuantity, checkout } = useContext(CartContext)
  const { register, handleSubmit, watch, setValue ,formState: { errors } } = useForm<FormInputs>({
   resolver: zodResolver(checkoutFormSchema)
  })
@@ -75,7 +77,8 @@ export function Checkout() {
 
   const delivery = 3.5
 
-  function handleOrderCheckout(data : any) {
+  function handleOrderCheckout(data: OrderInfo) {
+    checkout(data)
     console.log(data)
   }
 

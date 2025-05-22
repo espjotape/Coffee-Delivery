@@ -1,6 +1,8 @@
 import { createContext, useEffect, useReducer } from "react"
-import { addItemAction, decrementItemQuantityAction, incrementItemQuantityAction, removeItemCartAction, type CartItem } from "../reducers/Cart/actions"
+import { addItemAction, checkoutAction, decrementItemQuantityAction, incrementItemQuantityAction, removeItemCartAction, type CartItem } from "../reducers/Cart/actions"
 import { cartReducer } from "../reducers/Cart/reducer"
+import type { OrderInfo } from "../pages/Checkout"
+import { useNavigate } from "react-router-dom"
 
 interface CartContextProviderProps {
  children: React.ReactNode
@@ -8,33 +10,30 @@ interface CartContextProviderProps {
 
 interface CartContextType {
  cart: CartItem[]
+ order: OrderInfo | null
  addItem: (item: CartItem) => void
  removeItem: (itemId: CartItem['id']) => void
  incrementItemQuantity: (itemId: string) => void
  decrementItemQuantity: (itemId: string) => void
+ checkout: (order: OrderInfo) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
  
 export function CartContextProvider({children} : CartContextProviderProps) {
- const [cartState, dispatch] = useReducer(
+  const [cartState, dispatch] = useReducer(
   cartReducer,
-  { cart: [] },
+  { cart: [], order: [] },
   () => {
    const storedState = localStorage.getItem("coffee-delivery:cart-state-1.0.0")
    if (storedState) {
     return JSON.parse(storedState)
    }
-   return { cart: []}
+   return { cart: [], order: []}
   }
  )
 
- useEffect(() => {
-  localStorage.setItem(
-   '@coffee-delivery:cart-state-1.0.0',
-   JSON.stringify(cartState)
-  )
- }, [cartState])
+ const { cart, order } = cartState
  
  function addItem(item: CartItem) {
   dispatch(addItemAction(item))
@@ -50,16 +49,33 @@ export function CartContextProvider({children} : CartContextProviderProps) {
 
  function decrementItemQuantity(itemId: string) {
    dispatch(decrementItemQuantityAction(itemId))
- } 
+ }
+
+ const navigate = useNavigate()
+
+ function checkout(order: OrderInfo){
+  dispatch(checkoutAction(order))
+  const orderId = Date.now()
+  navigate(`/order/${orderId}/success`)
+ }
+
+  useEffect(() => {
+  localStorage.setItem(
+   '@coffee-delivery:cart-state-1.0.0',
+   JSON.stringify(cartState)
+  )
+ }, [cartState])
 
  return(
   <CartContext.Provider 
    value={{
-    cart: cartState.cart,
+    cart,
+    order,
     addItem,
     removeItem,
     incrementItemQuantity,
-    decrementItemQuantity
+    decrementItemQuantity,
+    checkout
    }}
    >
    {children}

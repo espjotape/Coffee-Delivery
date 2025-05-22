@@ -1,3 +1,4 @@
+import type { OrderInfo } from "../../pages/Checkout"
 
 export interface CartItem {
   id: string
@@ -10,7 +11,8 @@ export enum ActionTypes {
   ADD_ITEM = 'ADD_ITEM',
   REMOVE_ITEM = 'REMOVE_ITEM',
   INCREMENT_ITEM_QUANTITY = 'INCREMENT_ITEM_QUANTITY',
-  DECREMENT_ITEM_QUANTITY = 'DECREMENT_ITEM_QUANTITY'
+  DECREMENT_ITEM_QUANTITY = 'DECREMENT_ITEM_QUANTITY',
+  CHECKOUT = 'CHECKOUT'
 }
 
 export function addItemAction(item: CartItem) {
@@ -49,8 +51,16 @@ export function decrementItemQuantityAction(itemId: string) {
   } as const
 }
 
+export function checkoutAction(order: OrderInfo) {
+  return {
+    type: ActionTypes.CHECKOUT,
+    payload: { order }
+  } as const;
+}
+
 export type CartAction = 
   | ReturnType<typeof addItemAction>
   | ReturnType<typeof removeItemCartAction>
   | ReturnType<typeof incrementItemQuantityAction>
   | ReturnType<typeof decrementItemQuantityAction>
+  | ReturnType<typeof checkoutAction>

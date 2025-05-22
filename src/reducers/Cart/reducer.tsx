@@ -1,8 +1,10 @@
 import { produce } from "immer";
 import { ActionTypes, type CartAction, type CartItem } from "./actions";
+import type { OrderInfo } from "../../pages/Checkout";
 
 export interface CartState {
  cart: CartItem[]
+ order: OrderInfo | null
 }
 
 export function cartReducer(state: CartState, action: CartAction) {
@@ -45,6 +47,14 @@ export function cartReducer(state: CartState, action: CartAction) {
       )
       return { ...state, cart: updatedCart }
    }
+  
+  case ActionTypes.CHECKOUT: {
+   return{
+      ...state,
+      cart: [],
+      order: action.payload.order
+   }
+  }
 
    default:
     return state

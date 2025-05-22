@@ -3,26 +3,25 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { App } from './App.tsx'
-import { DefaultLayout } from './layouts/DefaultLayout/index.tsx'
 import { Home } from './pages/Home/Index.tsx'
 import { Checkout } from './pages/Checkout/index.tsx'
+import { Success } from './pages/Sucess/index.tsx'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <DefaultLayout />,
+    element: <App />,
     children: [
       { path: '/', element: <Home/>},
-      { path: '/checkout', element: <Checkout/>}
+      { path: '/checkout', element: <Checkout/>},
+      { path: '/order/:orderId/success', element: <Success/>}
     ]
   }
 ])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App>
-      <RouterProvider router={router}/>
-    </App>
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
