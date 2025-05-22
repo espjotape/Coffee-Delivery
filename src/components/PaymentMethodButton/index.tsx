@@ -4,12 +4,13 @@ type Props = {
  icon: React.ReactNode
  label: string
  isActive: boolean
+ hasError: boolean
  onClick: () => void
 }
 
-export function PaymentMethodButton({ icon, label, isActive, onClick }: Props) {
+export function PaymentMethodButton({ icon, label, isActive, hasError ,onClick }: Props) {
  return(
-  <Container data-state={isActive} onClick={onClick}>
+  <Container data-error={hasError} data-state={isActive} onClick={onClick}>
    {icon}
    <span>{label}</span>
   </Container>

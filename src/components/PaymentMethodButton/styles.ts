@@ -19,6 +19,10 @@ export const Container = styled.label`
     border-color: ${({ theme }) => theme.COLORS.purple};
   }
 
+  &[data-error='true'] {
+    border-color: red;
+  }
+
   span {
    color: ${({ theme }) => theme.COLORS["base-text"]};
    text-transform: uppercase;
