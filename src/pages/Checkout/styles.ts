@@ -232,4 +232,9 @@ export const Button = styled.button `
   &:hover {
     background-color: ${(props => props.theme.COLORS['yellow-dark'])};
   }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 `

@@ -43,6 +43,7 @@ export function Checkout() {
  })
 
  const selectedPaymentMethod = watch('paymentMethod')
+ const emptyCart = cart.length === 0
 
  const showError = !!errors.paymentMethod && !selectedPaymentMethod;
 
@@ -78,8 +79,8 @@ export function Checkout() {
   const delivery = 3.5
 
   function handleOrderCheckout(data: OrderInfo) {
+
     checkout(data)
-    console.log(data)
   }
 
  return (
@@ -255,7 +256,7 @@ export function Checkout() {
           </h4>
         </section>
 
-        <Button type="submit" form="order">confirmar pedido</Button>
+        <Button disabled={emptyCart} type="submit" form="order">confirmar pedido</Button>
       </CartTotal>
     </CartContainer>
    </InfoCheckout>
