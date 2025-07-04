@@ -1,54 +1,65 @@
-# React + TypeScript + Vite
+# ☕ Coffee Delivery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Encontre o café perfeito para qualquer hora do dia.**  
+Com o Coffee Delivery, você recebe seu café onde estiver, a qualquer hora.
 
-Currently, two official plugins are available:
+![Coffee Delivery Screenshot](public/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- ✅ Listagem de cafés disponíveis para compra
+- ✅ Adição de quantidade específica de cafés no carrinho
+- ✅ Aumento ou remoção da quantidade de cafés no carrinho
+- ✅ Formulário para preenchimento do endereço de entrega
+- ✅ Exibição do total de itens no carrinho no cabeçalho
+- ✅ Cálculo do valor total da compra (quantidade × preço unitário)
+- ✅ Armazenamento do carrinho no LocalStorage
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 💡 Benefícios da plataforma
+
+- **Compra simples e segura**  
+- **Entrega que mantém o café intacto**
+- **Entrega rápida e rastreável**
+- **O café chega fresquinho até você**
+
+---
+
+## 📦 Tecnologias utilizadas
+
+- ReactJS
+- Context API
+- LocalStorage
+- Vite
+- TypeScript
+- Styled-components
+
+---
+
+## 🚀 Como executar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/coffee-delivery.git
+cd coffee-delivery
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Instale as dependências
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+# ou
+yarn install
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 3. Inicie o servidor de desenvolvimento
+
+```bash
+npm run dev
+# ou
+yarn dev
 ```
